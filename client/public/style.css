@@ -1,0 +1,180 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%; 
+    max-height: 100%; 
+    background: lightgrey;
+    font-size: 14px;
+}
+
+#main {
+    position: fixed;
+    left: 230px; /* Width of the nav bar */
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    /*background: #fff;*/
+}
+
+#actions {
+    padding: 10px;
+    height: 7%;
+}
+
+#actions button {
+    font-size: 14px;
+}
+
+.material-icons.md-14 {
+    font-size: 14px;
+}
+
+.search { position: relative; }
+.search input { text-indent: 30px;}
+.search .material-icons { 
+  position: absolute;
+  left: 7px;
+}
+
+#mail-requests{
+    height: 60%;
+    padding: 10px;
+    overflow: auto; 
+    background-color: #fff;
+    font-size: 12px;
+}
+
+.requests {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.requests .column {
+    text-align: left;
+    max-width: 1px; 
+    width: 100%; 
+    padding-left: 2px;
+    padding-right: 2px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+.requests .five {
+    width: 5%;
+}
+
+.requests .ten {
+    width: 10%;
+}
+
+.requests .fifteen {
+    width: 15%;
+}
+
+.requests .head {
+    color: #fff;
+    background-color: darkblue;
+    margin-right: 1px;
+}
+
+#mail-details {
+    bottom: 0px;
+    width: 100%;
+    height: 
+    overflow: hidden; /* Disables scrollbars on the footer frame. To enable scrollbars, change "hidden" to "scroll" */
+    padding-top: 10px;
+}
+
+#mail-details .head .title {
+    background: #fff;
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 1px;
+    padding: 5px;
+    height:100%;
+    float: left;
+}
+
+#mail-details .head .rest {
+    border-bottom: 1px;
+    clear: left;
+}
+
+#mail-details .body {
+    background: #fff;
+    border: 1px;
+    padding: 5px;
+}
+
+#mail-details .body .column {
+    display: table;
+    float: left;
+    width: 50%;
+}
+
+#mail-details .body .column .title {
+    color: blue;
+    font-weight: bold;
+    margin: 5px 10px 15px 10px;
+}
+
+#mail-details .body:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#mail-details .body .row {
+    display: table-row;
+    margin: 5px 10px 0px 0px;
+}
+
+#mail-details .body .label {
+    display: table-cell;
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+#mail-details .body .value {
+    display: table-cell;
+}
+
+#nav {
+    position: absolute; 
+    left: 0;
+    top: 0;
+    bottom: 0; 
+    width: 230px;
+    overflow: auto; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+    border-right: 1px solid #b7b4b4
+}
+
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0px 0px 0px;
+}
+
+nav ul li {
+    display: block;
+    margin: 5px 3px 5px 3px;
+    width: 100%;
+    height: 30px;
+}
+
+nav ul li.selected {
+    background-color: lightblue
+}
+
+nav ul a {
+    padding: 5px;
+    color: black;
+    text-decoration: none;
+}
