@@ -39,9 +39,9 @@ class RequestList extends React.PureComponent {
                             index={index} 
                             {...request}
                             selected={this.props.selected && request.id === this.props.selected.id}
-                            onChange={() => this.props.selected && request.id === this.props.selected.id? this.props.unselectRequest() : this.props.selectRequest(request)}/>
+                            onChange={() => this.props.selected && request.id === this.props.selected.id? this.props.unselectRequest() : this.props.selectRequest({...request, index})}/>
                         )}
-                        {hasMore && <Waypoint onEnter={() => this.props.loadMoreRequests()} />}
+                        {hasMore && requests.length && <Waypoint onEnter={() => this.props.loadMoreRequests()} />}
                     </tbody>
                 </table>
             </div>

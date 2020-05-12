@@ -15,13 +15,16 @@ return function (App $app) {
     });
 
     $app->get('/', function (Request $request, Response $response) {
-        $htmlIndex = 'Test';
+        $htmlIndex = file_get_contents('../client/build/index.html');
         $response->getBody()->write($htmlIndex);
         return $response;
     });
 
     $app->group('/api', function (Group $group) {
+        $group->put('/requests/{id}', function(Request $request, Response $response) {
+            $response->getBody()->write('OK');
+            return $response;
+        });
         $group->get('/requests', ListUsersAction::class);
-        $group->get('/{id}', ViewUserAction::class);
     });
 };

@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import {NO_MORE_DATA, ADD_REQUESTS, SELECT_REQUEST, SET_STATUS_FILTER, SET_QUERY_FILTER} from './actions';
+import {NO_MORE_DATA, ADD_REQUESTS, SELECT_REQUEST, SET_STATUS_FILTER, SET_QUERY_FILTER, REMOVE_REQUEST} from './actions';
 
 const requests = (state = {}, action) => {
     if (action.type === ADD_REQUESTS){
@@ -20,6 +20,12 @@ const requests = (state = {}, action) => {
         return {
             requests: [],
             done: false
+        }
+    }
+    else if (action.type === REMOVE_REQUEST){
+        return {
+            ...state,
+            requests: [...state.requests.slice(0, action.index), ...state.requests.slice(action.index+1)] 
         }
     }
     return state;
@@ -42,7 +48,7 @@ const filters = (state = {}, action) => {
     if (action.type === SET_QUERY_FILTER){
         return {
             ...state,
-            status: action.query
+            query: action.query
         };
     }
     return state;
