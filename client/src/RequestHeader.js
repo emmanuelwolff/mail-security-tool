@@ -1,18 +1,18 @@
 import React from 'react';
+import {filtersConnector} from './redux/connectors';
 
-const RequestHeader = () => {
+const RequestHeader = (props) => {
     return (
         <table>
             <tbody>
                 <tr>
                     <td>
                         <span>Status</span>
-                        <select>
-                            <option value="">Open</option>
-                            <option value="">All Requests</option>
-                            <option value="">Open</option>
-                            <option value="">Approved</option>
-                            <option value="">Rejected </option>
+                        <select value={(props.filters || {}).status} onChange={(e) => props.setStatusFilter(e.target.value)}>
+                            <option value="all">All Requests</option>
+                            <option value="open">Open</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected </option>
                         </select>
                     </td>
                     <td>
@@ -36,7 +36,7 @@ const RequestHeader = () => {
                     <td>
                         <div className="search">
                             <span className="material-icons md-14">search</span>
-                            <input placeholder="Search" />
+                            <input placeholder="Search" value={(props.filters || {}).query}/>
                         </div>
                     </td>
                 </tr>
@@ -45,4 +45,4 @@ const RequestHeader = () => {
     );
 }
 
-export default RequestHeader;
+export default filtersConnector(RequestHeader);

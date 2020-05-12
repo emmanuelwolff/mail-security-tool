@@ -1,5 +1,6 @@
 import React from 'react';
 import { Waypoint } from 'react-waypoint';
+import get from 'lodash.get';
 import {requestsConnector, selectedConnector} from './redux/connectors';
 
 class RequestList extends React.PureComponent {
@@ -7,7 +8,13 @@ class RequestList extends React.PureComponent {
     componentDidMount(){
         this.props.loadMoreRequests();
     }
-    
+
+    componentDidUpdate(){
+        if (!get(this.props, 'requests.requests', []).length){
+            this.props.loadMoreRequests();
+        }
+    }
+
     render(){
         const requests = (this.props.requests || {}).requests || [];
         const hasMore = !(this.props.requests || {}).done;

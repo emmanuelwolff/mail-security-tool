@@ -1,7 +1,6 @@
 
-const BASE_URI = '';
-
-export const fetchRequests = (start = 0) => {
-    return fetch(BASE_URI + `api/requests?offset=${start}`)
+export const fetchRequests = (start = 0, {status = null, query = null}) => {
+    let uri = `api/requests?offset=${start}${status? '&s=' + status: ''}${query? '&q=' + query : ''}`;
+    return fetch(uri)
         .then(response => response.json())
 }
