@@ -12,7 +12,7 @@ const RequestHeader = (props) => {
                         <select value={(props.filters || {}).status} onChange={(e) => props.setStatusFilter(e.target.value)}>
                             <option value="all">All Requests</option>
                             <option value="open">Open</option>
-                            <option value="approved">Approved</option>
+                            <option value="released">Approved</option>
                             <option value="rejected">Rejected </option>
                         </select>
                     </td>

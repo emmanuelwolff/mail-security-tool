@@ -8,10 +8,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
-function get_requests(int $offset, $status = null, $search = null){
-
-}
-
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -32,8 +28,15 @@ return function (App $app) {
         });
         $group->get('/requests', function(Request $request, Response $response){
             $offset = $request->getQueryParams()['offset'] ?? 0;
+            $status = $request->getQueryParams()['s'] ?? null;
             $conn = pg_connect(getenv("DATABASE_URL"));
-            $result = pg_query($conn, "select * from mail_check_requests order by requested_at desc offset $offset limit 50"); 
+            //$result = pg_query($conn, "select * from mail_check_requests order by requested_at desc offset $offset limit 50"); 
+            $query = "select * from mail_check_requests ";
+            if ($status !== null && $status !== 'all'){
+                $query .= "where status = '$status'";
+            }
+            $query .= " order by requested_at desc offset $offset limit 50"; 
+            $result = pg_query($conn, $query ); 
             $requests = pg_fetch_all($result);
 
             $payload = [
