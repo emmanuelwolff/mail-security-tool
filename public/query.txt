@@ -1,0 +1,1 @@
+select * from mail_check_requests where status = 'released' and concat(requested_by, recipient, sender, subject, status, rejected_status) like '%bosco.bethel@harris.com%'  order by requested_at desc offset 1 limit 50

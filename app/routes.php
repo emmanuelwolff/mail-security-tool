@@ -27,7 +27,6 @@ return function (App $app) {
             $id = $args['id'];
             $status = $request->getBody()->getContents(); 
             $conn = pg_connect(getenv("DATABASE_URL"));
-            file_put_contents('./test.txt', 'status got : ' . $status);
             if (pg_update($conn, 'mail_check_requests', ['status' => $status], ['id' => $id])){
                 return $response->withStatus(200);
             }
@@ -39,17 +38,21 @@ return function (App $app) {
         $group->get('/requests', function(Request $request, Response $response){
             $offset = $request->getQueryParams()['offset'] ?? 0;
             $status = $request->getQueryParams()['s'] ?? null;
+            $search = urldecode($request->getQueryParams()['q'] ?? '');
             $conn = pg_connect(getenv("DATABASE_URL"));
             //$result = pg_query($conn, "select * from mail_check_requests order by requested_at desc offset $offset limit 50"); 
             $query = "select * from mail_check_requests ";
+            $where = 'where';
             if ($status !== null && $status !== 'all'){
-                $query .= "where status = '$status'";
+                $query .= "where status = '$status' ";
+                $where= 'and';
+            }
+            if ($search && $search != ''){
+                $query .= $where . " concat(requested_by, recipient, sender, subject, status, rejected_status) like '%$search%' ";
             }
             $query .= " order by requested_at desc offset $offset limit 50"; 
             $result = pg_query($conn, $query ); 
-
             $requests = pg_fetch_all($result) ?: [];
-
             $payload = [
                 'data' => [
                     'requests' => $requests,
