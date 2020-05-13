@@ -5,7 +5,7 @@ In order to build the production files from react-create-app and populate then t
 ./build.sh
 ```
 
-. The (dirty :-)) server code is all inside `app/routes.php` file
+. The (dirty) server code is all inside `app/routes.php` file
 . The react code is inside `client/src/` directory
 
 # TO DO
@@ -13,4 +13,4 @@ In order to build the production files from react-create-app and populate then t
 - Remove unused files / features inherited from react-create-app and slim-skeleton frameworks
 
 # TO IMPROVE
-- (I prefer not talking about the design :-))
+- (I prefer not talking about the design :-) )
