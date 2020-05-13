@@ -2,6 +2,7 @@ import {fetchRequests, updateRequestStatus} from '../serverApi';
 
 export const ADD_REQUESTS = 'ADD_REQUESTS';
 export const REMOVE_REQUEST = 'REMOVE_REQUEST';
+export const SET_REQUEST_STATUS = 'SET_REQUEST_STATUS';
 export const NO_MORE_DATA = 'NO_MORE_DATA';
 export const SELECT_REQUEST = 'SELECT_REQUEST';
 export const CHANGE_REQUEST_STATUS = 'CHANGE_REQUEST_STATUS';
@@ -56,17 +57,26 @@ export const unselectRequest = () => {
     }
 }
 
+const setRequestStatus = (index, status) => {
+    return {
+        type: SET_REQUEST_STATUS,
+        index, 
+        status
+    }
+}
+
 export const changeRequestStatus = (status) => {
     return (dispatch, getState) => {
         const {selected, filters} = getState();
         if (!selected) return false;
         updateRequestStatus(selected.id, status).then(() => {
+            dispatch(setRequestStatus(selected.index, status));
             if (filters.status && filters.status !== 'all' && selected.status !== filters.status){
                 dispatch(unselectRequest());
                 dispatch(removeRequest(selected.index)); 
             }
             return false;
-        }).catch(() => {});
+        }).catch(() => { /* TODO */});
     }
 }
 
