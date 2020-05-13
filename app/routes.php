@@ -14,11 +14,11 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/', function (Request $request, Response $response) {
-        $htmlIndex = file_get_contents(__DIR__  . '/public/index.html');
-        $response->getBody()->write($htmlIndex);
-        return $response;
-    });
+    //$app->get('/', function (Request $request, Response $response) {
+        //$htmlIndex = file_get_contents(__DIR__  . '/public/index.html');
+        //$response->getBody()->write($htmlIndex);
+        //return $response;
+    //});
 
     $app->group('/api', function (Group $group) {
         $group->put('/requests/{id}', function(Request $request, Response $response) {
