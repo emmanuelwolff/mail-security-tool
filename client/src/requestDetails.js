@@ -51,8 +51,8 @@ const RequestDetails = (props) => {
                             <div className="value">{request.requested_at}</div>
                         </div>
                         <div className="row">
-                            <div className="label">Justification</div>
-                            <div className="value"></div>
+                            <div className="label">Status</div>
+                            <div className="value">{request.status}</div>
                         </div>
                     </div>
                 </div>

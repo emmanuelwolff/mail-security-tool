@@ -65,6 +65,14 @@ body {
     text-overflow: ellipsis;
 }
 
+.requests .red {
+    background-color: #f58b8bfa;
+}
+
+.requests .green {
+    background-color: #7ce87c;
+}
+
 .requests .five {
     width: 5%;
 }

@@ -51,7 +51,7 @@ class RequestList extends React.PureComponent {
 
 const RequestRow = (props) => {
     return (
-        <tr>
+        <tr className={props.status === 'rejected' ? 'red' : (props.status === 'released' ? 'green' : '')}>
             <td className="five column" style={{ textAlign: 'center' }}>
                 <input type="checkbox" checked={props.selected} onChange={props.onChange}/>
             </td>
