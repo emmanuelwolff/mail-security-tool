@@ -71,7 +71,7 @@ export const changeRequestStatus = (status) => {
         if (!selected) return false;
         updateRequestStatus(selected.id, status).then(() => {
             dispatch(setRequestStatus(selected.index, status));
-            if (filters.status && filters.status !== 'all' && selected.status !== filters.status){
+            if (filters.status && filters.status !== 'all' && status !== filters.status){
                 dispatch(unselectRequest());
                 dispatch(removeRequest(selected.index)); 
             }

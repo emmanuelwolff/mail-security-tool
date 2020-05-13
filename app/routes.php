@@ -37,7 +37,6 @@ return function (App $app) {
         });
 
         $group->get('/requests', function(Request $request, Response $response){
-            echo 'toto';
             $offset = $request->getQueryParams()['offset'] ?? 0;
             $status = $request->getQueryParams()['s'] ?? null;
             $conn = pg_connect(getenv("DATABASE_URL"));
@@ -48,12 +47,13 @@ return function (App $app) {
             }
             $query .= " order by requested_at desc offset $offset limit 50"; 
             $result = pg_query($conn, $query ); 
-            $requests = pg_fetch_all($result);
+
+            $requests = pg_fetch_all($result) ?: [];
 
             $payload = [
                 'data' => [
                     'requests' => $requests,
-                    'done' => (rand(1, 10) === 10) 
+                    'done' => count($requests) === 0 
                 ]
             ];
             $json = json_encode($payload, JSON_PRETTY_PRINT);
