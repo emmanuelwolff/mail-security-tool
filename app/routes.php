@@ -22,11 +22,22 @@ return function (App $app) {
     });
 
     $app->group('/api', function (Group $group) {
-        $group->put('/requests/{id}', function(Request $request, Response $response) {
-            $response->getBody()->write('OK');
-            return $response;
+
+        $group->put('/requests/{id}', function(Request $request, Response $response, $args) {
+            $id = $args['id'];
+            $status = $request->getBody()->getContents(); 
+            $conn = pg_connect(getenv("DATABASE_URL"));
+            file_put_contents('./test.txt', 'status got : ' . $status);
+            if (pg_update($conn, 'mail_check_requests', ['status' => $status], ['id' => $id])){
+                return $response->withStatus(200);
+            }
+            else{
+                return $response->withStatus(400);
+            }
         });
+
         $group->get('/requests', function(Request $request, Response $response){
+            echo 'toto';
             $offset = $request->getQueryParams()['offset'] ?? 0;
             $status = $request->getQueryParams()['s'] ?? null;
             $conn = pg_connect(getenv("DATABASE_URL"));

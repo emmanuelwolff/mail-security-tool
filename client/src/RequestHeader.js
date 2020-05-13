@@ -17,7 +17,7 @@ const RequestHeader = (props) => {
                         </select>
                     </td>
                     <td>
-                        <button onClick={() => props.changeRequestStatus('approved')}>
+                        <button onClick={() => props.changeRequestStatus('released')}>
                             <i className="material-icons md-14">playlist_add_check</i>
                             Release
                         </button>
