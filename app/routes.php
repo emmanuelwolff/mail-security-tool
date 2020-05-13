@@ -15,7 +15,7 @@ return function (App $app) {
     });
 
     $app->get('/', function (Request $request, Response $response) {
-        $htmlIndex = file_get_contents('../client/build/index.html');
+        $htmlIndex = file_get_contents(__DIR__  . '/public/index.html');
         $response->getBody()->write($htmlIndex);
         return $response;
     });
